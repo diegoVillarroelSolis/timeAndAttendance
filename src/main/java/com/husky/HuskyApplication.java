@@ -1,12 +1,12 @@
-package com.timeandattendancebackend;
+package com.husky;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TimeAndAttendanceServerApplication {
+public class HuskyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TimeAndAttendanceServerApplication.class, args);
+		SpringApplication.run(HuskyApplication.class, args);
 	}
 }
