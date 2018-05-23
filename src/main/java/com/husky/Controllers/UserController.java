@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController // class is a controller
-@RequestMapping(path = "/user") // URL start with demo
+@RestController
+@RequestMapping(path = "/users") // URL start with users
 public class UserController {
 
     private UserRepository userRepository;
@@ -18,23 +18,9 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<User> getAll() {
-        return userRepository.findAll();
-    }
-
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public List<User> create(@RequestBody User user) {
         userRepository.save(user);
-
-        return userRepository.findAll();
-    }
-
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public List<User> delete(@PathVariable long id) {
-        userRepository.deleteById(id);
-
         return userRepository.findAll();
     }
 
@@ -42,9 +28,4 @@ public class UserController {
     public User getUserById (@PathVariable long id){
         return userRepository.findById(id).get();
     }
-
-    /*@RequestMapping(method = RequestMethod.GET)
-    public User getUser(@RequestParam(value="name") String name) {
-        return userRepository.findByName(name);
-    }*/
 }
