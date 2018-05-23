@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity // Hibernate to make a table out of this class
+@Entity // To create a table out of this class
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
