@@ -1,9 +1,6 @@
 package com.husky.entities;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Date;
 
 @Entity
@@ -12,7 +9,7 @@ public class FloatingHoliday {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "floatingId")
-    private long id;
+    private Long id;
 
     private Date date;
     private int hours;
@@ -21,11 +18,23 @@ public class FloatingHoliday {
     private String hasChildren;
     private String description;
 
-    public long getId() {
+
+    public FloatingHoliday(){
+
+    }
+    public FloatingHoliday(Date date, int hours, Gender userGender, String hasChildren, String description) {
+        this.date = date;
+        this.hours = hours;
+        this.userGender = userGender;
+        this.hasChildren = hasChildren;
+        this.description = description;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -45,13 +54,21 @@ public class FloatingHoliday {
         this.hours = hours;
     }
 
-    public Gender getUserGender() { return userGender; }
+    public Gender getUserGender() {
+        return userGender;
+    }
 
-    public void setUserGender(Gender userGender) { this.userGender = userGender; }
+    public void setUserGender(Gender userGender) {
+        this.userGender = userGender;
+    }
 
-    public String getHasChildren() { return hasChildren; }
+    public String getHasChildren() {
+        return hasChildren;
+    }
 
-    public void setHasChildren(String hasChildren) { this.hasChildren = hasChildren; }
+    public void setHasChildren(String hasChildren) {
+        this.hasChildren = hasChildren;
+    }
 
     public String getDescription() {
         return description;
@@ -60,5 +77,4 @@ public class FloatingHoliday {
     public void setDescription(String description) {
         this.description = description;
     }
-
 }
