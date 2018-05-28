@@ -9,18 +9,19 @@ import javax.inject.Inject;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/users")
 public class UserController {
 
     @Inject
     private UserRepository userRepository;
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public List<User> create(@RequestBody User user) {
+    @RequestMapping(method = RequestMethod.POST)
+    public User create(@RequestBody User user) {
         userRepository.save(user);
-        return userRepository.findAll();
+        return user;
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getUserById (@PathVariable long id){
         return userRepository.findById(id).get();
     }
