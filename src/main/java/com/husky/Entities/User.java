@@ -1,9 +1,6 @@
 package com.husky.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
@@ -12,7 +9,8 @@ public class User {
     private Long id;
     private String name;
     private String lastname;
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     private boolean isParent;
 
 
@@ -42,11 +40,11 @@ public class User {
         this.lastname = lastname;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
