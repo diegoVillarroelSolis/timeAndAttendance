@@ -3,15 +3,13 @@ package com.husky.controllers;
 import com.husky.entities.Request;
 import com.husky.repositories.RequestRepository;
 import com.husky.repositories.UserRepository;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@RestController
 public class RequestController {
     @Inject
     private UserRepository userRepository;
