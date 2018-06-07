@@ -7,11 +7,11 @@ import java.util.Set;
 import java.util.Date;
 
 @Entity
-@Table(name = "floating_holidays")
+@Table(name = "floatingHolidays")
 public class FloatingHoliday {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "floating_id")
+    @Column(name = "floatingId")
     private long id;
 
     private Date date;

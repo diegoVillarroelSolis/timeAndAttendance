@@ -11,7 +11,7 @@ public class Request {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "request_id")
+    @Column(name = "requestId")
     private long id;
 
     private Date dateSendRequest;
@@ -21,13 +21,13 @@ public class Request {
     private Date floatingHolidayDateRequest;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     @JsonBackReference
     private User user;
 
 
     @ManyToOne
-    @JoinColumn(name = "floating_id")
+    @JoinColumn(name = "floatingId")
     private FloatingHoliday floatingHoliday;
 
     public long getId() {

@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
+@RequestMapping(value = "/users")
 public class RequestController {
     @Inject
     private UserRepository userRepository;
@@ -17,13 +17,13 @@ public class RequestController {
     @Inject
     private RequestRepository requestRepository;
 
-    @RequestMapping(value ="/users/{user_id}/requests", method = RequestMethod.GET)
-    public List<Request> getRequestsByUserId(@PathVariable(value = "user_id") Long user_id){
+    @RequestMapping(value ="/{userId}/requests", method = RequestMethod.GET)
+    public List<Request> getRequestsByUserId(@PathVariable(value = "userId") Long user_id){
         return requestRepository.findByUserId(user_id);
     }
 
-    @RequestMapping(value="/users/{user_id}/requests", method = RequestMethod.POST)
-    public Request createRequest(@PathVariable(value = "user_id") Long user_id, @RequestBody Request request){
+    @RequestMapping(value="/{userId}/requests", method = RequestMethod.POST)
+    public Request createRequest(@PathVariable(value = "userId") Long user_id, @RequestBody Request request){
         return userRepository.findById(user_id).map(user -> {
             request.setUser(user);
             return requestRepository.save(request);
