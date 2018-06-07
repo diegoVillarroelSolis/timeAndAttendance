@@ -1,8 +1,6 @@
 package com.husky.entities;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class User {
@@ -15,9 +13,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private boolean isParent;
-
-    @OneToMany(mappedBy = "user")
-    private Set<Request> requests = new HashSet<Request>();
 
     public User() {}
 
@@ -61,11 +56,4 @@ public class User {
         isParent = parent;
     }
 
-    public Set<Request> getRequests() {
-        return requests;
-    }
-
-    public void setRequests(Set<Request> requests) {
-        this.requests = requests;
-    }
 }
