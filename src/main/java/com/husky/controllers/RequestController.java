@@ -18,15 +18,15 @@ public class RequestController {
     private RequestRepository requestRepository;
 
     @RequestMapping(value ="/{userId}/requests", method = RequestMethod.GET)
-    public List<Request> getRequestsByUserId(@PathVariable(value = "userId") Long user_id){
-        return requestRepository.findByUserId(user_id);
+    public List<Request> getRequestsByUserId(@PathVariable(value = "userId") Long userId){
+        return requestRepository.findByUserId(userId);
     }
 
     @RequestMapping(value="/{userId}/requests", method = RequestMethod.POST)
-    public Request createRequest(@PathVariable(value = "userId") Long user_id, @RequestBody Request request){
-        return userRepository.findById(user_id).map(user -> {
+    public Request createRequest(@PathVariable(value = "userId") Long userId, @RequestBody Request request){
+        return userRepository.findById(userId).map(user -> {
             request.setUser(user);
             return requestRepository.save(request);
-        }).orElseThrow(() -> new RuntimeException("User id" + user_id + "Not Found"));
+        }).orElseThrow(() -> new RuntimeException("User id" + userId + "Not Found"));
     }
 }
