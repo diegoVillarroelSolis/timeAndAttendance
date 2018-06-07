@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Date;
 
 @Entity
 @Table(name = "floating_holidays")
@@ -13,15 +14,11 @@ public class FloatingHoliday {
     @Column(name = "floating_id")
     private long id;
 
-    private LocalDateTime date;
-    @Column(name = "hours")
+    private Date date;
     private int hours;
     private String user_gender;
     private String has_children;
-    private String name;
-
-    @OneToMany(mappedBy = "floatingHoliday")
-    private Set<Request> requests = new HashSet<Request>();
+    private String description;
 
     public long getId() {
         return id;
@@ -31,11 +28,11 @@ public class FloatingHoliday {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -63,19 +60,12 @@ public class FloatingHoliday {
         this.has_children = has_children;
     }
 
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
-    public Set<Request> getRequests() {
-        return requests;
-    }
-
-    public void setRequests(Set<Request> requests) {
-        this.requests = requests;
-    }
+    
 }
