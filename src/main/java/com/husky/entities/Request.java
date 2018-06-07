@@ -3,7 +3,7 @@ package com.husky.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "request")
@@ -15,22 +15,20 @@ public class Request {
     private long id;
 
     private String name;
-    private LocalDateTime dateSendRequest;
+    private Date dateSendRequest;
 
     private String status;
 
-    private LocalDateTime floatingHolidayDateRequest;
+    private Date floatingHolidayDateRequest;
 
     @ManyToOne
-    @JoinColumn(name = "person_id")
+    @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
 
 
     @ManyToOne
     @JoinColumn(name = "floating_id")
-
-    @JsonBackReference
     private FloatingHoliday floatingHoliday;
 
     public long getId() {
@@ -49,20 +47,20 @@ public class Request {
         this.name = name;
     }
 
-    public LocalDateTime getDateSendRequest() {
+    public Date getDateSendRequest() {
         return dateSendRequest;
     }
 
-    public void setDateSendRequest(LocalDateTime dateSendRequest) {
+    public void setDateSendRequest(Date dateSendRequest) {
         this.dateSendRequest = dateSendRequest;
     }
 
 
-    public LocalDateTime getFloatingHolidayDateRequest() {
+    public Date getFloatingHolidayDateRequest() {
         return floatingHolidayDateRequest;
     }
 
-    public void setFloatingHolidayDateRequest(LocalDateTime floatingHolidayDateRequest) {
+    public void setFloatingHolidayDateRequest(Date floatingHolidayDateRequest) {
         this.floatingHolidayDateRequest = floatingHolidayDateRequest;
     }
 
