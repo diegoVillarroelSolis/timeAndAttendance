@@ -2,11 +2,9 @@ package com.husky.controllers;
 
 import com.husky.entities.User;
 import com.husky.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -21,8 +19,8 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public User getUserById (@PathVariable long id){
-        return userRepository.findById(id).get();
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public User getUserById (@PathVariable long userId){
+        return userRepository.findById(userId).get();
     }
 }
