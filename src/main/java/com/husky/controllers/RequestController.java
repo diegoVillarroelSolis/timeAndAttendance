@@ -23,7 +23,8 @@ public class RequestController {
     }
 
     @RequestMapping(value="/{userId}/requests", method = RequestMethod.POST)
-    public Request createRequest(@PathVariable(value = "userId") Long userId, @RequestBody Request request){
+    public Request createRequest(@PathVariable(value = "userId") Long userId,
+                                 @RequestBody Request request){
         return userRepository.findById(userId).map(user -> {
             request.setUser(user);
             return requestRepository.save(request);

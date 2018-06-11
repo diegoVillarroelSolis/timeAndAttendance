@@ -16,8 +16,9 @@ public class FloatingHoliday {
 
     private Date date;
     private int hours;
-    private String user_gender;
-    private String has_children;
+    @Enumerated(EnumType.STRING)
+    private Gender userGender;
+    private String hasChildren;
     private String description;
 
     public long getId() {
@@ -44,21 +45,13 @@ public class FloatingHoliday {
         this.hours = hours;
     }
 
-    public String getUser_gender() {
-        return user_gender;
-    }
+    public Gender getUserGender() { return userGender; }
 
-    public void setUser_gender(String user_gender) {
-        this.user_gender = user_gender;
-    }
+    public void setUserGender(Gender userGender) { this.userGender = userGender; }
 
-    public String getHas_children() {
-        return has_children;
-    }
+    public String getHasChildren() { return hasChildren; }
 
-    public void setHas_children(String has_children) {
-        this.has_children = has_children;
-    }
+    public void setHasChildren(String hasChildren) { this.hasChildren = hasChildren; }
 
     public String getDescription() {
         return description;

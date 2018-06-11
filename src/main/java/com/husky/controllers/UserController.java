@@ -19,8 +19,8 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public User getUserById (@PathVariable long id){
-        return userRepository.findById(id).get();
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public User getUserById (@PathVariable long userId){
+        return userRepository.findById(userId).get();
     }
 }

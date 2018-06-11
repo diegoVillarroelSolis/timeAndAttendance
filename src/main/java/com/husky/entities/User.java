@@ -9,7 +9,7 @@ public class User {
     @Column(name = "userId")
     private Long id;
     private String name;
-    private String lastname;
+    private String lastName;
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private boolean isParent;
@@ -32,13 +32,9 @@ public class User {
         this.name = name;
     }
 
-    public String getLastname() {
-        return lastname;
-    }
+    public String getLastName() { return lastName; }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
     public Gender getGender() {
         return gender;
@@ -52,8 +48,8 @@ public class User {
         return isParent;
     }
 
-    public void setParent(boolean parent) {
-        isParent = parent;
+    public void setParent(boolean isParent) {
+        isParent = isParent;
     }
 
 }
