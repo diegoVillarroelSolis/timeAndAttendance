@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 public class CsvHandler {
@@ -101,22 +102,22 @@ public class CsvHandler {
     }
 
 
-    public FloatingHoliday convertToHolyDay(Vector<String> attributes){
+    public FloatingHoliday convertToHolyDay(List<String> attributes){
         FloatingHoliday floatingHoliday = new FloatingHoliday();
-        try {
-            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-            floatingHoliday.setDate(validateDateFormat(attributes.elementAt(0)));
-            floatingHoliday.setHours(Integer.parseInt(attributes.elementAt(1)));
-            if (attributes.elementAt(2).isEmpty()){
-                floatingHoliday.setUserGender(Gender.valueOf("FEMALE"));
+        if (rowHasMissingData(attributes)){
+            floatingHoliday = null;
+        }
+        else {
+            try {
+                DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+                floatingHoliday.setDate(validateDateFormat(attributes.get(0)));
+                floatingHoliday.setHours(Integer.parseInt(attributes.get(1)));
+                floatingHoliday.setUserGender(Gender.setGender(attributes.get(2)));
+                floatingHoliday.setHasChildren(attributes.get(3));
+                floatingHoliday.setDescription(attributes.get(4));
+            }catch (Exception exception){
+                throw exception;
             }
-            else {
-                floatingHoliday.setUserGender(Gender.valueOf(attributes.elementAt(2)));
-            }
-            floatingHoliday.setHasChildren(attributes.elementAt(3));
-            floatingHoliday.setDescription(attributes.elementAt(4));
-        }catch (Exception exception){
-            throw exception;
         }
         return floatingHoliday;
     }
@@ -148,4 +149,17 @@ public class CsvHandler {
         }
         return isEmpty;
     }
+
+    public boolean rowHasMissingData(List<String> rowOfData){
+        boolean hasMissingData = false;
+        for (String element: rowOfData) {
+            if (element.isEmpty() || element == ""){
+                hasMissingData = true;
+                break;
+            }
+        }
+        return hasMissingData;
+    }
+
+
 }
