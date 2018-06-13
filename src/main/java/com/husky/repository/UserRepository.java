@@ -1,6 +1,5 @@
-package com.husky.repositories;
+package com.husky.repository;
 
-import com.husky.entities.User;
 import com.husky.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

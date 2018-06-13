@@ -1,4 +1,4 @@
-package com.husky.entities;
+package com.husky.entity;
 
 
 public enum Gender {

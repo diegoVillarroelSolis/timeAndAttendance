@@ -33,10 +33,11 @@ public class FloatingHolidayController {
     public FloatingHoliday addFloating(@RequestBody FloatingHoliday newFloating){
         return floatingHolidayRepository.save(newFloating);
     }
+
     @RequestMapping(value = "/users/{userId}/floatings", method = RequestMethod.GET)
     public List<FloatingHoliday> getAllFloatingByUser(@PathVariable Long userId){
         User user = userRepository.findById(userId).get();
-        return floatingHolidayRepository.findByUserGenderAndUserParent(user.getGender(), user.isIsparent());
+        return floatingHolidayRepository.findByUserGenderAndUserParent(user.getGender(), user.isIsParent());
       //return null;
     }
 }
