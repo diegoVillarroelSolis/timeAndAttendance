@@ -24,7 +24,9 @@ public class FloatingHolidayController {
            CsvHandler csvHandler = new CsvHandler(file);
            Vector<FloatingHoliday> resultVector = csvHandler.getCsvDataAsFloatingHolidays();
            for (FloatingHoliday floatingHoliday :resultVector) {
-               floatingHolidayRepository.save(floatingHoliday);
+               if (floatingHoliday!= null){
+                   floatingHolidayRepository.save(floatingHoliday);
+               }
            }
            httpStatus.put("200: ","OK");
        } catch (Exception exception) {

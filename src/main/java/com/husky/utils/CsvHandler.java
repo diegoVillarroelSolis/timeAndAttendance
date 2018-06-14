@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 public class CsvHandler {
@@ -76,7 +77,9 @@ public class CsvHandler {
         Vector<String> dataInRows = new Vector<>();
         for (headerIndex =0; headerIndex < dataInStrings.length ; headerIndex++){
             String [] aux = dataInStrings[headerIndex].split(",");
-            dataInRows.addAll(Arrays.asList(aux));
+            if (aux.length==5){
+                dataInRows.addAll(Arrays.asList(aux));
+            }
         }
         return dataInRows;
     }
@@ -87,12 +90,13 @@ public class CsvHandler {
         for (int i = 1; i<dataInRows.size()/ numberOfColumns; i++){
             dataRow.clear();
             for (int j = i* numberOfColumns; j<((i* numberOfColumns)+ numberOfColumns) ; j++){
-
-                if (dataInRows.elementAt(i) != null){
+                if (dataInRows.elementAt(j) != null || !dataInRows.elementAt(j).trim().isEmpty()){
                     dataRow.addElement(dataInRows.elementAt(j));
                 }
-                else
-                    dataRow.add("");
+                else{
+                    dataRow.addElement("");
+                }
+
             }
             FloatingHoliday floatingHoliday = convertToHolyDay(dataRow);
             resultVector.addElement(floatingHoliday);
@@ -101,22 +105,27 @@ public class CsvHandler {
     }
 
 
-    public FloatingHoliday convertToHolyDay(Vector<String> attributes){
+    public FloatingHoliday convertToHolyDay(List<String> attributes){
         FloatingHoliday floatingHoliday = new FloatingHoliday();
-        try {
-            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-            floatingHoliday.setDate(validateDateFormat(attributes.elementAt(0)));
-            floatingHoliday.setHours(Integer.parseInt(attributes.elementAt(1)));
-            if (attributes.elementAt(2).isEmpty()){
-                floatingHoliday.setUserGender(Gender.valueOf("FEMALE"));
+        if (rowHasMissingData(attributes)){
+            floatingHoliday = null;
+        }
+        else {
+            try {
+                DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+                floatingHoliday.setDate(validateDateFormat(attributes.get(0)));
+                floatingHoliday.setHours(Integer.parseInt(attributes.get(1).trim()));
+                if (attributes.get(2).equals("MALE") || attributes.get(2).equals("FEMALE")){
+                    floatingHoliday.setUserGender(Gender.valueOf(attributes.get(2)));
+                }
+                else {
+                    floatingHoliday.setUserGender(null);
+                }
+                floatingHoliday.setHasChildren(attributes.get(3));
+                floatingHoliday.setDescription(attributes.get(4));
+            }catch (Exception exception){
+                throw exception;
             }
-            else {
-                floatingHoliday.setUserGender(Gender.valueOf(attributes.elementAt(2)));
-            }
-            floatingHoliday.setHasChildren(attributes.elementAt(3));
-            floatingHoliday.setDescription(attributes.elementAt(4));
-        }catch (Exception exception){
-            throw exception;
         }
         return floatingHoliday;
     }
@@ -148,4 +157,17 @@ public class CsvHandler {
         }
         return isEmpty;
     }
+
+    public boolean rowHasMissingData(List<String> rowOfData){
+        boolean hasMissingData = false;
+        for (String element: rowOfData) {
+            if (element.trim().isEmpty() || element==null){
+                hasMissingData = true;
+                break;
+            }
+        }
+        return hasMissingData;
+    }
+
+
 }
