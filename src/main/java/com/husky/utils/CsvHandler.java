@@ -90,7 +90,7 @@ public class CsvHandler {
         for (int i = 1; i<dataInRows.size()/ numberOfColumns; i++){
             dataRow.clear();
             for (int j = i* numberOfColumns; j<((i* numberOfColumns)+ numberOfColumns) ; j++){
-                if (dataInRows.elementAt(j) != null || !dataInRows.elementAt(j).isEmpty() || !dataInRows.elementAt(j).equals("")){
+                if (dataInRows.elementAt(j) != null || !dataInRows.elementAt(j).isEmpty() || !dataInRows.elementAt(j).equals(" ")){
                     dataRow.addElement(dataInRows.elementAt(j));
                 }
                 else{
@@ -115,7 +115,12 @@ public class CsvHandler {
                 DateFormat df = new SimpleDateFormat(DATE_FORMAT);
                 floatingHoliday.setDate(validateDateFormat(attributes.get(0)));
                 floatingHoliday.setHours(Integer.parseInt(attributes.get(1)));
-                floatingHoliday.setUserGender(Gender.setGender(attributes.get(2)));
+                if (attributes.get(2).equals("MALE") || attributes.get(2).equals("FEMALE")){
+                    floatingHoliday.setUserGender(Gender.valueOf(attributes.get(2)));
+                }
+                else {
+                    floatingHoliday.setUserGender(null);
+                }
                 floatingHoliday.setHasChildren(attributes.get(3));
                 floatingHoliday.setDescription(attributes.get(4));
             }catch (Exception exception){
@@ -156,7 +161,7 @@ public class CsvHandler {
     public boolean rowHasMissingData(List<String> rowOfData){
         boolean hasMissingData = false;
         for (String element: rowOfData) {
-            if (element.isEmpty() || element.equals("")){
+            if (element.isEmpty() || element.equals(" ")){
                 hasMissingData = true;
                 break;
             }
