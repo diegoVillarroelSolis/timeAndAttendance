@@ -159,7 +159,11 @@ public class CsvHandler {
     private boolean rowHasMissingData(List<String> rowOfData){
         boolean hasMissingData = false;
         for (String element: rowOfData) {
-            if (element.trim().isEmpty() || element==null){
+            if (element==null){
+                hasMissingData = true;
+                break;
+            }
+            else if (element.trim().isEmpty()){
                 hasMissingData = true;
                 break;
             }
