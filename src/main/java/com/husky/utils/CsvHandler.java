@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Vector;
 
 public class CsvHandler {
-    public final static String DATE_FORMAT = "yyyy/MM/dd";
+    private final static String DATE_FORMAT = "yyyy/MM/dd";
     private MultipartFile file;
     private int numberOfColumns =5;
     private final String[] csvHeaders = {"date","hours","userGender","userParent","description"};
@@ -43,7 +43,7 @@ public class CsvHandler {
     }
 
 
-    public String[] separateFileInStrings(MultipartFile file){
+    private String[] separateFileInStrings(MultipartFile file){
         byte[] bytes = new byte[0];
         try {
             bytes = file.getBytes();
@@ -51,11 +51,10 @@ public class CsvHandler {
             e.printStackTrace();
         }
         String completeData = new String(bytes);
-        String[] columns = completeData.split("\r\n");
-        return columns;
+        return completeData.split("\r\n");
     }
 
-    public boolean headerIsCorrect(String[] columns){
+    private boolean headerIsCorrect(String[] columns){
         String[] header = columns[0].split(",");
         Boolean status = true;
         if (header.length == numberOfColumns){
@@ -72,7 +71,7 @@ public class CsvHandler {
         return status;
     }
 
-    public Vector<String> separateDataInRows(String[] dataInStrings){
+    private Vector<String> separateDataInRows(String[] dataInStrings){
         int headerIndex;
         Vector<String> dataInRows = new Vector<>();
         for (headerIndex =0; headerIndex < dataInStrings.length ; headerIndex++){
@@ -84,7 +83,7 @@ public class CsvHandler {
         return dataInRows;
     }
 
-    public Vector<FloatingHoliday> getDataInHolidaysFromRows(Vector<String> dataInRows){
+    private Vector<FloatingHoliday> getDataInHolidaysFromRows(Vector<String> dataInRows){
         Vector<FloatingHoliday> resultVector = new Vector<>();
         Vector<String> dataRow =  new Vector<>();
         for (int i = 1; i<dataInRows.size()/ numberOfColumns; i++){
@@ -105,14 +104,13 @@ public class CsvHandler {
     }
 
 
-    public FloatingHoliday convertToHolyDay(List<String> attributes){
+    private FloatingHoliday convertToHolyDay(List<String> attributes){
         FloatingHoliday floatingHoliday = new FloatingHoliday();
         if (rowHasMissingData(attributes)){
             floatingHoliday = null;
         }
         else {
             try {
-                DateFormat df = new SimpleDateFormat(DATE_FORMAT);
                 floatingHoliday.setDate(validateDateFormat(attributes.get(0)));
                 floatingHoliday.setHours(Integer.parseInt(attributes.get(1).trim()));
                 if (attributes.get(2).equals("MALE") || attributes.get(2).equals("FEMALE")){
@@ -130,7 +128,7 @@ public class CsvHandler {
         return floatingHoliday;
     }
 
-    public Date validateDateFormat(String date){
+    private Date validateDateFormat(String date){
         DateFormat df = new SimpleDateFormat(DATE_FORMAT);
         Date formattedDate = new Date();
         try {
@@ -146,7 +144,7 @@ public class CsvHandler {
         return formattedDate;
     }
 
-    public boolean dataIsEmpty(String [] data){
+    private boolean dataIsEmpty(String [] data){
         boolean isEmpty = false;
         int numberOfElements =0;
         for (String row:data) {
@@ -158,7 +156,7 @@ public class CsvHandler {
         return isEmpty;
     }
 
-    public boolean rowHasMissingData(List<String> rowOfData){
+    private boolean rowHasMissingData(List<String> rowOfData){
         boolean hasMissingData = false;
         for (String element: rowOfData) {
             if (element.trim().isEmpty() || element==null){
