@@ -32,7 +32,6 @@ public class FloatingHolidayController {
        } catch (Exception exception) {
            httpStatus.put("Reason:",exception.getMessage());
            httpStatus.put("400: ", "FAIL");
-           exception.printStackTrace();
        }
        return httpStatus;
     }
