@@ -90,7 +90,7 @@ public class CsvHandler {
         for (int i = 1; i<dataInRows.size()/ numberOfColumns; i++){
             dataRow.clear();
             for (int j = i* numberOfColumns; j<((i* numberOfColumns)+ numberOfColumns) ; j++){
-                if (dataInRows.elementAt(j) != null || !dataInRows.elementAt(j).isEmpty() || dataInRows.elementAt(j).trim().length()>0){
+                if (dataInRows.elementAt(j) != null || !dataInRows.elementAt(j).trim().isEmpty()){
                     dataRow.addElement(dataInRows.elementAt(j));
                 }
                 else{
@@ -161,7 +161,7 @@ public class CsvHandler {
     public boolean rowHasMissingData(List<String> rowOfData){
         boolean hasMissingData = false;
         for (String element: rowOfData) {
-            if (element.isEmpty() || element.trim().length()==0){
+            if (element.trim().isEmpty() || element==null){
                 hasMissingData = true;
                 break;
             }
