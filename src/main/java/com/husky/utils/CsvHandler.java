@@ -77,7 +77,9 @@ public class CsvHandler {
         Vector<String> dataInRows = new Vector<>();
         for (headerIndex =0; headerIndex < dataInStrings.length ; headerIndex++){
             String [] aux = dataInStrings[headerIndex].split(",");
-            dataInRows.addAll(Arrays.asList(aux));
+            if (aux.length==5){
+                dataInRows.addAll(Arrays.asList(aux));
+            }
         }
         return dataInRows;
     }
@@ -88,12 +90,13 @@ public class CsvHandler {
         for (int i = 1; i<dataInRows.size()/ numberOfColumns; i++){
             dataRow.clear();
             for (int j = i* numberOfColumns; j<((i* numberOfColumns)+ numberOfColumns) ; j++){
-
-                if (dataInRows.elementAt(i) != null){
+                if (dataInRows.elementAt(j) != null || !dataInRows.elementAt(j).isEmpty() || !dataInRows.elementAt(j).equals("")){
                     dataRow.addElement(dataInRows.elementAt(j));
                 }
-                else
-                    dataRow.add("");
+                else{
+                    dataRow.addElement("");
+                }
+
             }
             FloatingHoliday floatingHoliday = convertToHolyDay(dataRow);
             resultVector.addElement(floatingHoliday);
@@ -153,7 +156,7 @@ public class CsvHandler {
     public boolean rowHasMissingData(List<String> rowOfData){
         boolean hasMissingData = false;
         for (String element: rowOfData) {
-            if (element.isEmpty() || element == ""){
+            if (element.isEmpty() || element.equals("")){
                 hasMissingData = true;
                 break;
             }
