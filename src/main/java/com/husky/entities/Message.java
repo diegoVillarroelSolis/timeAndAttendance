@@ -1,20 +1,21 @@
 package com.husky.entities;
 
 public class Message {
-    private String content;
+
+    private String name;
 
     public Message() {
     }
 
-    public Message(String content) {
-        this.content = content;
+    public Message(String name) {
+        this.name = name;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public String getName() {
+        return name;
     }
 
-    public String getContent() {
-        return content;
+    public void setName(String name) {
+        this.name = name;
     }
 }

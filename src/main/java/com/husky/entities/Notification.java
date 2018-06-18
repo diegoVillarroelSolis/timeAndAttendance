@@ -1,32 +1,18 @@
 package com.husky.entities;
 
-import javax.persistence.*;
-
 public class Notification {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @OneToOne
-    private Request request;
-    private String message;
 
-    public Notification(String message){
-        this.message = message;
+    private String content;
+
+    public Notification() {
     }
 
-    public Request getRequest() {
-        return request;
+    public Notification(String content) {
+        this.content = content;
     }
 
-    public void setRequest(Request request) {
-        this.request = request;
+    public String getContent() {
+        return content;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

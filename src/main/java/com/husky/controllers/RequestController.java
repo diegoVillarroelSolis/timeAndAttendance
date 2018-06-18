@@ -3,6 +3,7 @@ package com.husky.controllers;
 import com.husky.entities.Request;
 import com.husky.repositories.RequestRepository;
 import com.husky.repositories.UserRepository;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -23,6 +24,7 @@ public class RequestController {
     }
 
     @RequestMapping(value="/{userId}/requests", method = RequestMethod.POST)
+    @SendTo("/topic/greetings")
     public Request createRequest(@PathVariable(value = "userId") Long userId,
                                  @RequestBody Request request){
         return userRepository.findById(userId).map(user -> {
@@ -30,4 +32,6 @@ public class RequestController {
             return requestRepository.save(request);
         }).orElseThrow(() -> new RuntimeException("User id" + userId + "Not Found"));
     }
+
+
 }
